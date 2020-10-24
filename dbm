@@ -1,12 +1,16 @@
 Declare Function StartJob Lib "C:\Users\d645daar\Downloads\DLL DBM\calcdll.dll" (ByRef p1 As Double, ByRef p2 As Variant, ByRef p3 As Double) As Boolean
 Declare Function SetPricePath Lib "C:\Users\d645daar\Downloads\DLL DBM\calcdll.dll" (ByRef p1 As String)
 
+Const DLL_PATH = "C:\Users\d645daar\Downloads\DLL DBM"
 Const NINPUTDATA = 100
 Const NRESDATA = 100
 Const NOPTIONSDATA = 1
-'Const P60 = 1
+Const P60 = 1
 
 Sub StartCalc_Clicked()
+
+'Change working directory'
+ChDir DLL_PATH
 
 Dim bErr As Boolean
 Dim aInputData(NINPUTDATA) As Double
@@ -16,17 +20,17 @@ Dim aOptions(NOPTIONSDATA) As Variant
 'On Error GoTo StartCalc_exit
 
 'Collect data from input mask
-aInputData(0) = 113 'coil type P25
+aInputData(0) = 1 '113 for coil type P25
 aInputData(1) = 30 'inlet temperature °C
 aInputData(2) = 70 '% R.H.
-aInputData(5) = 6000 'air volume 6000 m3/h
+aInputData(5) = 6000 'air volume m3/h
 aInputData(14) = 2 'Rows
-aInputData(15) = 24 '10 tubes per row
-aInputData(16) = 2.5 'fin pitch 2.0 mm
-aInputData(17) = 24 '24 circuits
-aInputData(18) = 1222 'coil length 500 mm
-aInputData(26) = 7 'water inlet temp 7 °C
-aInputData(27) = 12 'water outlet temp 12 °C
+aInputData(15) = 24 'tubes per row
+aInputData(16) = 2.5 'fin pitch
+aInputData(17) = 24 'circuits
+aInputData(18) = 1222 'coil length mm
+aInputData(26) = 7 'water inlet temp °C
+aInputData(27) = 12 'water outlet temp °C
 'aInputData(52) = 2 'PRICE MULTIPLIER
 
 'Prices
