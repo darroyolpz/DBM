@@ -10,7 +10,7 @@ Const P60 = 1
 Sub StartCalc_Clicked()
 
 'Change working directory'
-ChDir DLL_PATH
+'ChDir DLL_PATH
 
 Dim bErr As Boolean
 Dim aInputData(NINPUTDATA) As Double
@@ -24,17 +24,27 @@ aInputData(0) = 1 '113 for coil type P25
 aInputData(1) = 30 'inlet temperature °C
 aInputData(2) = 70 '% R.H.
 aInputData(5) = 6000 'air volume m3/h
+
 aInputData(14) = 2 'Rows
 aInputData(15) = 24 'tubes per row
 aInputData(16) = 2.5 'fin pitch
 aInputData(17) = 24 'circuits
 aInputData(18) = 1222 'coil length mm
+
 aInputData(26) = 7 'water inlet temp °C
 aInputData(27) = 12 'water outlet temp °C
-'aInputData(52) = 2 'PRICE MULTIPLIER
+
+'aInputData(52) = 2 'Price multiplier
+
+'aInputData(61) = 1  'Fin material
+'aInputData(62) = 0.1  'Fin thickness
+'aInputData(63) = 0.3 'Tube thickness
+'aInputData(65) = 0 'Tube material - 0 for Cu
+
+'aInputData(78) = 2 'Calculation mode
 
 'Prices
-'SetPricePath (".\\")
+'SetPricePath ("C:\Users\d645daar\Downloads\DLL DBM")
 
 a = StartJob(aInputData(0), aResult(0), aOptions(0))
 
