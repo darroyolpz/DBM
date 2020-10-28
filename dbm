@@ -10,7 +10,7 @@ Const P60 = 1
 Sub StartCalc_Clicked()
 
 'Change working directory'
-'ChDir DLL_PATH
+ChDir DLL_PATH
 
 Dim bErr As Boolean
 Dim aInputData(NINPUTDATA) As Double
@@ -44,7 +44,7 @@ aInputData(27) = 12 'water outlet temp °C
 'aInputData(78) = 2 'Calculation mode
 
 'Prices
-'SetPricePath ("C:\Users\d645daar\Downloads\DLL DBM")
+SetPricePath ("C:\Users\d645daar\Downloads\DLL DBM")
 
 a = StartJob(aInputData(0), aResult(0), aOptions(0))
 
