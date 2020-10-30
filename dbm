@@ -1,7 +1,5 @@
 Declare Function StartJob Lib "C:\Users\d645daar\Downloads\DLL DBM\calcdll.dll" (ByRef p1 As Double, ByRef p2 As Variant, ByRef p3 As Double) As Boolean
-Declare Function SetPricePath Lib "C:\Users\d645daar\Downloads\DLL DBM\calcdll.dll" (ByRef p1 As String)
 
-Const DLL_PATH = "C:\Users\d645daar\Downloads\DLL DBM"
 Const NINPUTDATA = 100
 Const NRESDATA = 100
 Const NOPTIONSDATA = 1
@@ -10,14 +8,13 @@ Const P60 = 1
 Sub StartCalc_Clicked()
 
 'Change working directory'
-ChDir DLL_PATH
+workingDir = Sheets(1).Cells(2, 3).Value
+ChDir workingDir
 
 Dim bErr As Boolean
 Dim aInputData(NINPUTDATA) As Double
 Dim aResult(NRESDATA) As Variant
 Dim aOptions(NOPTIONSDATA) As Variant
-
-'On Error GoTo StartCalc_exit
 
 'Collect data from input mask
 aInputData(0) = 113 '113 for coil type P25
@@ -34,32 +31,24 @@ aInputData(18) = 1222 'coil length mm
 aInputData(26) = 7 'water inlet temp °C
 aInputData(27) = 12 'water outlet temp °C
 
-aInputData(51) = 2 'Price multiplier
+aInputData(51) = 1.95 'Price multiplier
 
 aInputData(60) = 1  'Fin material
 aInputData(61) = 0.1  'Fin thickness
 aInputData(62) = 0.3 'Tube thickness
 aInputData(64) = 0 'Tube material - 0 for Cu
-
 'aInputData(78) = 2 'Calculation mode
-
-'Prices
-'SetPricePath ("C:\Users\d645daar\Downloads\DLL DBM")
 
 a = StartJob(aInputData(0), aResult(0), aOptions(0))
 
-'MsgBox ("Warning code: " & aResult(71))
-MsgBox ("Selected coil: " & aResult(29) & " Price: " & aResult(27)) 'Simple result processing
-End Sub
-'aInputData(65) = 0 'Tube material - 0 for Cu
+'Results
+coilCapacity = aResult(0)
+airOutletTemp = aResult(2)
+coilPrice = aResult(27)
+coil = aResult(29)
 
-'aInputData(78) = 2 'Calculation mode
+MsgBox ("Selected coil: " & coil & " Price: " & coilPrice & " €")
+'MsgBox ("Coil capacity: " & coilCapacity & " kW")
+'MsgBox ("Air outlet temp.: " & airOutletTemp & " ºC")
 
-'Prices
-SetPricePath ("C:\Users\d645daar\Downloads\DLL DBM")
-
-a = StartJob(aInputData(0), aResult(0), aOptions(0))
-
-'MsgBox ("Warning code: " & aResult(71))
-MsgBox ("Selected coil: " & aResult(29) & " Price: " & aResult(28)) 'Simple result processing
 End Sub
